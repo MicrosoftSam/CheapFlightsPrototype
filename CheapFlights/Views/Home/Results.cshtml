@@ -1,0 +1,49 @@
+﻿@model IEnumerable<FlightInfoViewModel>
+
+@if (Model != null)
+{
+    @foreach (var info in Model)
+    {
+        <div class="card m-1 p-1 border-primary">
+            <h4>Total price: @info.Price.Total @info.Currency </h4>
+            @foreach (var service in info.Services)
+            {
+
+                <div class="card m-1 p-1 border-secondary">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            @service.Segments[0].FlightSegment.Departure.TargetLocation-> @service.Segments[service.Segments.Count - 1].FlightSegment.Arrival.TargetLocation
+                        </h4>
+
+                        @if (service.Segments.Count > 1)
+                        {
+                            <p>You have: @(service.Segments.Count-1) trasfers</p>
+                        }
+                        else
+                        {
+                            <p>You dont have transfers</p>
+                        }
+                        @foreach (var segment in service.Segments)
+                        {
+                            <div class="card m-1 p-1 border-secondary">
+                                <div class="card-body">
+                                    <h4 class="card-title">Flight info</h4>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">Departure:@segment.FlightSegment.Departure.TargetLocation (@segment.FlightSegment.Departure.IataCode)</li>
+                                        <li class="list-group-item">Departure terminal: @segment.FlightSegment.Departure.Terminal</li>
+                                        <li class="list-group-item">Arrival:@segment.FlightSegment.Arrival.TargetLocation (@segment.FlightSegment.Arrival.IataCode)</li>
+                                        <li class="list-group-item">Arrival terminal: @segment.FlightSegment.Arrival.Terminal</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+
+
+            }
+        </div>
+    }
+}

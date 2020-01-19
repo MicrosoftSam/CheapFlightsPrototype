@@ -1,0 +1,116 @@
+﻿@model FlightQuery
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section scripts{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+                    $(function () {
+
+            var path = '@Url.Action("IataJsonResult")';
+
+            var getMapByValue = function () {
+                return $.ajax({
+                    url: path,
+                    dataType: "json",
+                    contentType: 'application/json, charset=utf-8'
+                });
+            }
+
+            var getArrFromObject = function (object) {
+                var arr = [];
+
+                for (var property in object) {
+                    if (object.hasOwnProperty(property)) {
+                        arr.push(object[property] + ' (' + property + ')');
+                    }
+                }
+
+                return arr;
+            }
+
+
+            getMapByValue()
+            .done(function (resp) {
+                console.log(resp);
+
+                var arr = getArrFromObject(resp);
+
+                $('#departure_city, #departure_dest').autocomplete({
+                source: arr
+            });
+            })
+            .fail(function (errr) {
+                console.error(errr)
+            });
+
+
+});
+
+
+        });
+
+
+
+    </script>
+}
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="text-center ui-widget">
+    <h3 class="display-4">Welcome to Cheap Flights Prototype app</h3>
+    <form class="container border-rounded ui-widget" asp-action="Index" asp-controller="Home" method="post" asp-antiforgery="true">
+        <div class="row">
+            <div class="col m-2">
+                <label asp-for="@Model.DepartureAirport">Departure</label>
+                <div class="col">
+                    <input type="text" id="departure_city" asp-for="@Model.DepartureAirport" class="form-control" />
+                </div>
+            </div>
+            <div class="col m-2">
+                <label asp-for="@Model.ArrivalAirport">Destination</label>
+                <div class="col">
+                    <input id="departure_dest" asp-for="@Model.ArrivalAirport" class="form-control" />
+                </div>
+            </div>
+            <div class="col m-2">
+                <label asp-for="@Model.DepartureDate">Departure date</label>
+                <div class="col">
+                    <input asp-for="@Model.DepartureDate" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m-2">
+                <label asp-for="@Model.ReturnDate">Return date</label>
+                <div class="col">
+                    <input asp-for="@Model.ReturnDate" class="form-control" />
+                </div>
+            </div>
+            <div class="col m-2">
+                <div class="col m-2">
+                    <label>Currency</label>
+                </div>
+                <select asp-for="Currency" asp-items="Html.GetEnumSelectList<Currency>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+            </div>
+            <div class="col m-2">
+                <label asp-for="@Model.Passengers">Number of passengers</label>
+                <div class="col">
+                    <input asp-for="@Model.Passengers" class="form-control" />
+                </div>
+            </div>
+            <div class="col m-5">
+                <div class="col">
+                    <button type="submit" class="btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
