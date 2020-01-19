@@ -1,21 +1,25 @@
 # CheapFlights
 
-Sample MVC aplikacija sa osnovnom funkcionalnošću dohvaćanja Low-Fare letova preko Amadeus API-a.
+Sample ASP.NET Core MVC application with basic functionality for retrieving Low-Fare flights via Amadeus API.
 
 ## Getting Started
 
-Jednostavno downloadati primjer i buildati ga ili pokrenuti primjer preko VS IDE debugginga.
+Simply download and build the example or execute it through VS IDE debugger.
 
+## ToDo
+- General UI improvments and whole UI revamp is needed.
+- User friendly exceptions, tho environment is still set to Development.
+- Implement browser local storage. 
 
 ## Built With
 
 * [ASP.NET Core 3.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.0) - Web framework
 * [Bootstrap](https://getbootstrap.com/) - Open source CSS library
-* [quicktype](https://app.quicktype.io/#l=cs&r=json2csharp) - Korišteno za automatsku izradu klasa iz JSON formata.
+* [quicktype](https://app.quicktype.io/#l=cs&r=json2csharp) - Used for automatic c# class creation from JSON format.
 
 ## Authors
 
-* **Igor Novak - Jembri** - *https://github.com/MicrosoftSam
+* **Igor Novak - Jembri** - *https://github.com/MicrosoftSam*
 
 
 ## License
@@ -24,4 +28,4 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 
-* [JSON Visualiser](http://jsonviewer.stack.hu/) - Fantastičan alat koji sam koristio za pomoć pri razabiranju nested JSON-a.
+* [JSON Visualiser](http://jsonviewer.stack.hu/) - Great tool that proved very useful in visualising nested JSON objects.
